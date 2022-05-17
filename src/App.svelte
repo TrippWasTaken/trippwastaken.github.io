@@ -18,7 +18,6 @@
     if (changeBG) {
       if (runAnim) {
         runAnim = false
-        console.log("test")
         anime({
           targets: ".color-body",
           opacity: 0,
@@ -30,7 +29,6 @@
     if (!changeBG) {
       if (!runAnim) {
         runAnim = true
-        console.log("test")
         anime({
           targets: ".color-body",
           opacity: 1,
