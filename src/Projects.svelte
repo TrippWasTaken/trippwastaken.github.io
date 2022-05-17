@@ -15,7 +15,7 @@
       description:
         "My own personal site that you are currently viewing, here I show off any projects from all the creative fields I practice, it is not quite 100% just yet but if you're viewing this its nearing completion",
       liveLink: "https://trippmedia.tech/",
-      gitLink: "https://github.com/TrippWasTaken/music-visualizer",
+      gitLink: "https://github.com/TrippWasTaken/trippwastaken.github.io",
       tech: ["Svelte", "AnimeJS", "SCSS"],
     },
   ]
