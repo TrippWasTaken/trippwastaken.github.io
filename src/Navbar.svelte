@@ -65,7 +65,7 @@
     }
 
     .trippmedia-header {
-      display: block;
+      display: flex;
     }
   }
 </style>

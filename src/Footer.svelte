@@ -10,11 +10,11 @@
         <span class="copyright-cont">© Konrad Knecht {dateYear} </span>
       {/each}
     </p>
-    <p class="loop">
+    <!-- <p class="loop">
       {#each loopText as item}
         <span class="copyright-cont">© Konrad Knecht {dateYear} </span>
       {/each}
-    </p>
+    </p> -->
   </span>
 </div>
 
@@ -30,7 +30,7 @@
     margin: 0;
     white-space: nowrap;
     overflow: clip;
-    position: absolute;
+    // position: absolute;
     background-color: black;
     padding: 2rem 0rem;
   }
