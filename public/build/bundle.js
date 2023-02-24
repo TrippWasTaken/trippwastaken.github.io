@@ -5734,9 +5734,9 @@ var app = (function () {
     			img_1 = element("img");
     			if (!src_url_equal(img_1.src, img_1_src_value = /*src*/ ctx[0])) attr_dev(img_1, "src", img_1_src_value);
     			attr_dev(img_1, "alt", img_1_alt_value = `Image number ${/*index*/ ctx[1]}`);
-    			attr_dev(img_1, "class", "svelte-jgk5sf");
+    			attr_dev(img_1, "class", "svelte-dpvhsv");
     			add_location(img_1, file$5, 24, 2, 689);
-    			attr_dev(div, "class", "photo-template svelte-jgk5sf");
+    			attr_dev(div, "class", "photo-template svelte-dpvhsv");
     			add_location(div, file$5, 23, 0, 635);
     		},
     		l: function claim(nodes) {
