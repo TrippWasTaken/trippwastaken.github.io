@@ -3,22 +3,8 @@
   import { onMount } from "svelte"
 
   export let show
-  let i
-  let currIndex = 0
-  const images = [
-    "/images/1.jpg",
-    "/images/2.jpg",
-    "/images/3.jpg",
-    "/images/4.jpg",
-    "/images/5.jpg",
-  ]
+  const images = "/images/1.jpg"
 
-  const setIndex = () => {
-    currIndex += 1
-    if (currIndex > 4) {
-      currIndex = 0
-    }
-  }
   onMount(() => {
     anime.set("div.banner-circle-hover-container", {
       opacity: 0,
@@ -27,13 +13,11 @@
 
   $: {
     if (show) {
-      i = setInterval(setIndex, 1000)
       anime({
         targets: "div.banner-circle-hover-container",
         opacity: 1,
       })
     } else {
-      clearInterval(i)
       anime({
         targets: "div.banner-circle-hover-container",
         opacity: 0,
@@ -43,7 +27,7 @@
 </script>
 
 <div class="banner-circle-hover-container ">
-  <img id="images-banner" src={images[currIndex]} alt="images" />
+  <img id="images-banner" src={images} alt="images" />
 </div>
 
 <style lang="scss">

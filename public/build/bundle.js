@@ -2437,12 +2437,12 @@ var app = (function () {
     			div = element("div");
     			img = element("img");
     			attr_dev(img, "id", "images-banner");
-    			if (!src_url_equal(img.src, img_src_value = /*images*/ ctx[1][/*currIndex*/ ctx[0]])) attr_dev(img, "src", img_src_value);
+    			if (!src_url_equal(img.src, img_src_value = images)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "images");
     			attr_dev(img, "class", "svelte-1477ue1");
-    			add_location(img, file$9, 42, 2, 885);
+    			add_location(img, file$9, 26, 2, 581);
     			attr_dev(div, "class", "banner-circle-hover-container  svelte-1477ue1");
-    			add_location(div, file$9, 41, 0, 837);
+    			add_location(div, file$9, 25, 0, 533);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2451,11 +2451,7 @@ var app = (function () {
     			insert_dev(target, div, anchor);
     			append_dev(div, img);
     		},
-    		p: function update(ctx, [dirty]) {
-    			if (dirty & /*currIndex*/ 1 && !src_url_equal(img.src, img_src_value = /*images*/ ctx[1][/*currIndex*/ ctx[0]])) {
-    				attr_dev(img, "src", img_src_value);
-    			}
-    		},
+    		p: noop,
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
@@ -2474,28 +2470,12 @@ var app = (function () {
     	return block;
     }
 
+    const images = "/images/1.jpg";
+
     function instance$9($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('CircleHover', slots, []);
     	let { show } = $$props;
-    	let i;
-    	let currIndex = 0;
-
-    	const images = [
-    		"/images/1.jpg",
-    		"/images/2.jpg",
-    		"/images/3.jpg",
-    		"/images/4.jpg",
-    		"/images/5.jpg"
-    	];
-
-    	const setIndex = () => {
-    		$$invalidate(0, currIndex += 1);
-
-    		if (currIndex > 4) {
-    			$$invalidate(0, currIndex = 0);
-    		}
-    	};
 
     	onMount(() => {
     		anime.set("div.banner-circle-hover-container", { opacity: 0 });
@@ -2508,23 +2488,13 @@ var app = (function () {
     	});
 
     	$$self.$$set = $$props => {
-    		if ('show' in $$props) $$invalidate(2, show = $$props.show);
+    		if ('show' in $$props) $$invalidate(0, show = $$props.show);
     	};
 
-    	$$self.$capture_state = () => ({
-    		anime,
-    		onMount,
-    		show,
-    		i,
-    		currIndex,
-    		images,
-    		setIndex
-    	});
+    	$$self.$capture_state = () => ({ anime, onMount, show, images });
 
     	$$self.$inject_state = $$props => {
-    		if ('show' in $$props) $$invalidate(2, show = $$props.show);
-    		if ('i' in $$props) $$invalidate(3, i = $$props.i);
-    		if ('currIndex' in $$props) $$invalidate(0, currIndex = $$props.currIndex);
+    		if ('show' in $$props) $$invalidate(0, show = $$props.show);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -2532,18 +2502,14 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*show, i*/ 12) {
+    		if ($$self.$$.dirty & /*show*/ 1) {
     			{
     				if (show) {
-    					$$invalidate(3, i = setInterval(setIndex, 1000));
-
     					anime({
     						targets: "div.banner-circle-hover-container",
     						opacity: 1
     					});
     				} else {
-    					clearInterval(i);
-
     					anime({
     						targets: "div.banner-circle-hover-container",
     						opacity: 0
@@ -2553,13 +2519,13 @@ var app = (function () {
     		}
     	};
 
-    	return [currIndex, images, show, i];
+    	return [show];
     }
 
     class CircleHover extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$9, create_fragment$9, safe_not_equal, { show: 2 });
+    		init(this, options, instance$9, create_fragment$9, safe_not_equal, { show: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -2571,7 +2537,7 @@ var app = (function () {
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*show*/ ctx[2] === undefined && !('show' in props)) {
+    		if (/*show*/ ctx[0] === undefined && !('show' in props)) {
     			console.warn("<CircleHover> was created without expected prop 'show'");
     		}
     	}
