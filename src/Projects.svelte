@@ -5,7 +5,7 @@
     {
       name: "Tunnel Vision",
       description:
-        "An Audio visualizer featuring a 3D tunnel made up of continously changing lines, featuring 4 songs for the user to choose from.",
+        "An Audio visualizer featuring a 3D tunnel made up of continously changing lines, featuring 4 songs by me to choose from.",
       liveLink: "https://trippwastaken.github.io/music-visualizer/",
       gitLink: "https://github.com/TrippWasTaken/music-visualizer",
       tech: ["Svelte", "Web Audio API", "ThreeJS", "SCSS"],
@@ -13,11 +13,17 @@
     {
       name: "Personal Portfolio",
       description:
-        "My own personal site that you are currently viewing, here I show off any projects from all the creative fields I practice, it is not quite 100% just yet but if you're viewing this its nearing completion",
+        "My own personal site that you are currently viewing, here I show off any projects from all the creative fields I practice",
       liveLink: "https://trippmedia.tech/",
       gitLink: "https://github.com/TrippWasTaken/trippwastaken.github.io",
       tech: ["Svelte", "AnimeJS", "SCSS"],
     },
+    {
+      name: "React clipping tool",
+      description: "An ongoing attempt to create a small clipping tool so I dont have to open davinci resolve everytime I want to show the boys something cool I did in apex legends, Its build in React using DaisyUI ontop of TailwindCSS",
+      gitLink: 'https://github.com/TrippWasTaken/Video-editor',
+      tech: ["React", "TailwindCSS", "Web Audio API", "WasmFFMPEG"]
+    }
   ]
 
   const projectEnter = (e) => {
@@ -58,10 +64,14 @@
         <span class="links-container">
           <br />
           <br />
+          {#if project.liveLink}            
           <a href={project.liveLink} target="_blank" rel="noopener noreferrer"
             >live</a
           >
+          {/if}
+          {#if project.liveLink && project.gitLink}
           ||
+          {/if}
           <a href={project.gitLink} target="_blank" rel="noopener noreferrer"
             >git</a
           >
@@ -74,7 +84,7 @@
 <style lang="scss">
   .projects-heading {
     font-size: 2rem;
-    color: white;
+    color: var(--yellow);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -101,9 +111,9 @@
 
   .tech-item-container {
     padding: 0.25rem;
-    margin-right: 0.25rem;
-    background-color: white;
-    color: black;
+    margin: 0.25rem;
+    background-color: var(--yellow);
+    color: var(--black);
     border-radius: 5px;
     font-size: 1.2rem;
     display: flex;
@@ -114,12 +124,13 @@
   .tech-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .project-container-box {
     display: flex;
     width: 75%;
-    border-left: white 0.75rem solid;
+    border-left: var(--yellow) 0.75rem solid;
     padding: 2rem;
     margin-bottom: 2rem;
   }
@@ -131,7 +142,7 @@
     justify-content: center;
     align-items: center;
     z-index: 20;
-    color: white;
+    color: var(--yellow);
     mix-blend-mode: difference;
   }
 

@@ -58,11 +58,11 @@
 </script>
 
 <main class="container">
-  <div id="intro">Welcome</div>
+  <!-- <div id="intro">Welcome</div>
   <div id="intro-line" />
-  {#if mainReady}
+  {#if mainReady} -->
     <Main />
-  {/if}
+  <!-- {/if} -->
 </main>
 
 <style lang="scss">
@@ -78,7 +78,7 @@
     top: 50%;
     left: 50%;
     overflow: hidden;
-    color: white;
+    color: var(--yellow);
     text-transform: uppercase;
     font-size: 6rem;
     mix-blend-mode: difference;
@@ -89,7 +89,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    background-color: white;
+    background-color: var(--yellow);
     height: 0.25rem;
   }
 </style>

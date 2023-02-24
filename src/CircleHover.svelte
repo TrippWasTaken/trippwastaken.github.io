@@ -10,17 +10,16 @@
     "/images/3.jpg",
     "/images/4.jpg",
     "/images/5.jpg",
-    "/images/6.png",
   ]
 
   const setIndex = () => {
     currIndex += 1
-    if (currIndex > 5) {
+    if (currIndex > 4) {
       currIndex = 0
     }
   }
   onMount(() => {
-    setInterval(setIndex, 1000)
+    setInterval(setIndex, 2000)
     anime.set("div.banner-circle-hover-container", {
       opacity: 0,
     })
@@ -50,7 +49,7 @@
     width: 50%;
     max-width: 720px;
     height: calc(100% - 10rem);
-    background-color: white;
+    background-color: var(--yellow);
     mix-blend-mode: difference;
     z-index: 10;
     position: absolute;

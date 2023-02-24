@@ -22,7 +22,7 @@
     z-index: 100;
     width: 0.5rem;
     height: 0.5rem;
-    background-color: white;
+    background-color: var(--yellow);
     border-radius: 50%;
     position: absolute;
     pointer-events: none;

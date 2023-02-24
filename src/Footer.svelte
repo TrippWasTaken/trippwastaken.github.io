@@ -10,29 +10,24 @@
         <span class="copyright-cont">© Konrad Knecht {dateYear} </span>
       {/each}
     </p>
-    <!-- <p class="loop">
-      {#each loopText as item}
-        <span class="copyright-cont">© Konrad Knecht {dateYear} </span>
-      {/each}
-    </p> -->
   </span>
 </div>
 
 <style lang="scss">
   .footer-container {
-    color: white;
+    color: var(--yellow);
   }
   .copyright-cont {
     font-size: 2rem;
+    padding: 0 1rem
   }
 
   .loop {
     margin: 0;
     white-space: nowrap;
     overflow: clip;
-    // position: absolute;
-    background-color: black;
-    padding: 2rem 0rem;
+    background-color: var(--yellow);
+    padding: 2rem 0;
   }
 
   .loop span {

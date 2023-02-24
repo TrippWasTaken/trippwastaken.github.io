@@ -81,13 +81,13 @@
   #side-nav-container {
     margin: 2rem;
     width: 2rem;
-    margin-top: 10%;
+    margin-top: 6rem;
     position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    color: white;
+    color: var(--yellow);
     mix-blend-mode: difference;
     z-index: 20;
     opacity: 1;
@@ -97,11 +97,12 @@
   }
 
   .link {
-    color: white;
+    color: var(--yellow);
+    display: block;
   }
 
   .link:hover {
-    background-color: black;
+    color: var(--black);
   }
 
   .icon-btn:hover {
@@ -112,6 +113,7 @@
   .icon-btn {
     mix-blend-mode: difference;
     transition: 0.1s ease-out;
+    display: block;
   }
 
   @media (max-width: 1024px) {
@@ -123,7 +125,7 @@
       flex-direction: row;
       bottom: 5%;
       position: fixed;
-      color: white;
+      color: var(--yellow);
       mix-blend-mode: difference;
       z-index: 50;
       opacity: 1;

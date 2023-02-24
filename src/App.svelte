@@ -55,25 +55,29 @@
   :global(html) {
     scroll-behavior: smooth;
   }
+  :global(:root){
+       --yellow: #edff00;
+       --black: #081C16;
+    }
   .color-body {
     position: fixed;
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    background-color: black;
+    background-color: var(--black);
   }
 
   :global(body) {
     font-family: "Helvetica", "Arial", sans-serif;
-    background-color: white;
+    background-color: var(--yellow);
     margin: 0;
     padding: 0;
     overflow-x: hidden;
   }
 
   :global(a, a:visited) {
-    color: white;
+    color: var(--yellow);
     padding: 0.5rem;
     position: relative;
     text-decoration: none;
@@ -87,7 +91,7 @@
     height: 0.2rem;
     top: 5px;
     left: 0.2rem;
-    background-color: black;
+    background-color: var(--black);
     transform: scaleX(0);
     transform-origin: top left;
     transition: transform 0.5s ease-in;
@@ -101,7 +105,7 @@
     height: 0.2rem;
     bottom: 5px;
     left: 0.2rem;
-    background-color: black;
+    background-color: var(--black);
     transform: scaleX(0);
     transform-origin: top right;
     transition: transform 0.5s ease-in;
@@ -117,8 +121,8 @@
 
   :global(a:hover) {
     text-decoration: none;
-    color: black;
-    background-color: white;
+    color: var(--black);
+    background-color: var(--yellow);
     transition: 0.5s ease-in-out;
   }
 </style>

@@ -19,7 +19,7 @@
     <div class="header-center-container">
       <nav class="nav-item"><a href="#home">HOME.</a></nav>
       <nav class="nav-item"><a href="#projects">PROJECTS.</a></nav>
-      <!-- <nav class="nav-item">ABOUT.</nav> -->
+      <nav class="nav-item"><a href="#media">MEDIA.</a></nav>
     </div>
     <div class="header-end-container" />
   </div>
@@ -29,7 +29,7 @@
   #nav-bar {
     width: 100%;
     z-index: 100;
-    color: white;
+    color: color;
     position: fixed;
     mix-blend-mode: difference;
   }

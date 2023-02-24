@@ -1,11 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte"
   import anime from "animejs/lib/anime.es.js"
-  import Navbar from "./navbar.svelte"
+  import Navbar from "./Navbar.svelte"
   import Projects from "./Projects.svelte"
   import CircleHover from "./CircleHover.svelte"
   import SideButtons from "./sideButtons.svelte"
-  import Footer from "./footer.svelte"
+  import Footer from "./Footer.svelte"
+  import Media from "./Media.svelte"
 
   let mountNav = false
   let showHover = false
@@ -157,14 +158,13 @@
   <CircleHover show={showHover} />
   {#if mountNav}
     <Projects />
+    <Media />
     <Footer />
   {/if}
 </main>
 
 <style lang="scss">
   .main-content {
-    height: 100%;
-    width: 100%;
     display: flex;
     flex-direction: column;
   }
@@ -194,7 +194,7 @@
   }
 
   .hover-dot {
-    background-color: white;
+    background-color: var(--yellow);
     width: 0.75rem;
     height: 0.75rem;
     border-radius: 50%;
@@ -244,15 +244,15 @@
 
   .white-box {
     padding: 0 0.5rem;
-    background-color: white;
-    color: black;
+    background-color: var(--yellow);
+    color: var(--black);
     letter-spacing: 0px;
     display: inline-block;
     mix-blend-mode: difference;
   }
 
   #main-transition {
-    background-color: white;
+    background-color: var(--yellow);
     position: absolute;
     width: 100%;
     z-index: 5;
@@ -261,7 +261,7 @@
 
   #content-render {
     letter-spacing: 6px;
-    color: white;
+    color: var(--yellow);
     font-size: 2rem;
     z-index: 10;
     mix-blend-mode: difference;
