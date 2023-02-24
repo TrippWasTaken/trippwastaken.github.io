@@ -58,11 +58,11 @@
 </script>
 
 <main class="container">
-  <!-- <div id="intro">Welcome</div>
+  <div id="intro">Welcome</div>
   <div id="intro-line" />
-  {#if mainReady} -->
+  {#if mainReady}
     <Main />
-  <!-- {/if} -->
+  {/if}
 </main>
 
 <style lang="scss">

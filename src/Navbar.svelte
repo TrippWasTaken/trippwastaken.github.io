@@ -38,6 +38,7 @@
     display: grid;
     grid-template-columns: [outer-left] 1fr [center-inner] 1fr [outer-right] 1fr;
     padding: 1rem 2rem;
+    color: var(--yellow);
   }
 
   .header-heading-container {

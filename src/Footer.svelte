@@ -15,7 +15,7 @@
 
 <style lang="scss">
   .footer-container {
-    color: var(--yellow);
+    color: var(--black);
   }
   .copyright-cont {
     font-size: 2rem;

@@ -90,7 +90,9 @@
 <div class="media-container" id="media">
   
   <div class="photos-container" bind:this={container} on:mousemove={mouseMove}>
-    <h1 class="projects-heading" bind:this={heading}><span>MEDIA</span></h1>
+    <h1 class="projects-heading" bind:this={heading} on:click={()=> {
+      window.open('https://www.youtube.com/watch?v=rAaQXDc_u2Y&list=PLdspHqRH7byQkWjHkHGyrhk0ZbY4QOGlp&index=1', '_blank').focus()
+      }}><span>MEDIA</span></h1>
     <div class="gallery-box" style="min-height: {galleryY}px; min-width: {galleryX}px" bind:this={gallery}>
       {#each photos as photo, index}
         <ImageContainer src={photo} index={index} sizing={sizing[index]}/>
@@ -102,12 +104,40 @@
 
 <style lang="scss">
   .projects-heading {
+    z-index: 10;
     font-size: 4rem;
-    color: var(--black);
+    color: var(--yellow);
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transition: all 1s ease;
+    transform: scale(1) translate(-50%, -50%);
+    mix-blend-mode: difference;
+    &:hover{
+      transform: scale(0) translate(-50%, -50%);
+      cursor: pointer;
+    }
+    &::after{
+      content: "FILM";
+      color: var(--black);
+      text-align: center;
+      display: inline-block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 120%;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      background-color: var(--yellow);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 500ms ease;
+    }
+    &:hover::after{
+      transform: translate(-50%, -50%) scale(1);
+    }
   }
 
   .gallery-box{
