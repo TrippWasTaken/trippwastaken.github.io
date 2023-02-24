@@ -3,6 +3,7 @@
   import { onMount } from "svelte"
 
   export let show
+  let i
   let currIndex = 0
   const images = [
     "/images/1.jpg",
@@ -19,7 +20,6 @@
     }
   }
   onMount(() => {
-    setInterval(setIndex, 2000)
     anime.set("div.banner-circle-hover-container", {
       opacity: 0,
     })
@@ -27,11 +27,13 @@
 
   $: {
     if (show) {
+      i = setInterval(setIndex, 1000)
       anime({
         targets: "div.banner-circle-hover-container",
         opacity: 1,
       })
     } else {
+      clearInterval(i)
       anime({
         targets: "div.banner-circle-hover-container",
         opacity: 0,

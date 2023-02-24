@@ -2440,9 +2440,9 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*images*/ ctx[1][/*currIndex*/ ctx[0]])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "images");
     			attr_dev(img, "class", "svelte-1477ue1");
-    			add_location(img, file$9, 40, 2, 842);
+    			add_location(img, file$9, 42, 2, 885);
     			attr_dev(div, "class", "banner-circle-hover-container  svelte-1477ue1");
-    			add_location(div, file$9, 39, 0, 794);
+    			add_location(div, file$9, 41, 0, 837);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2478,6 +2478,7 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('CircleHover', slots, []);
     	let { show } = $$props;
+    	let i;
     	let currIndex = 0;
 
     	const images = [
@@ -2497,7 +2498,6 @@ var app = (function () {
     	};
 
     	onMount(() => {
-    		setInterval(setIndex, 2000);
     		anime.set("div.banner-circle-hover-container", { opacity: 0 });
     	});
 
@@ -2515,6 +2515,7 @@ var app = (function () {
     		anime,
     		onMount,
     		show,
+    		i,
     		currIndex,
     		images,
     		setIndex
@@ -2522,6 +2523,7 @@ var app = (function () {
 
     	$$self.$inject_state = $$props => {
     		if ('show' in $$props) $$invalidate(2, show = $$props.show);
+    		if ('i' in $$props) $$invalidate(3, i = $$props.i);
     		if ('currIndex' in $$props) $$invalidate(0, currIndex = $$props.currIndex);
     	};
 
@@ -2530,14 +2532,18 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*show*/ 4) {
+    		if ($$self.$$.dirty & /*show, i*/ 12) {
     			{
     				if (show) {
+    					$$invalidate(3, i = setInterval(setIndex, 1000));
+
     					anime({
     						targets: "div.banner-circle-hover-container",
     						opacity: 1
     					});
     				} else {
+    					clearInterval(i);
+
     					anime({
     						targets: "div.banner-circle-hover-container",
     						opacity: 0
@@ -2547,7 +2553,7 @@ var app = (function () {
     		}
     	};
 
-    	return [currIndex, images, show];
+    	return [currIndex, images, show, i];
     }
 
     class CircleHover extends SvelteComponentDev {
