@@ -1,6 +1,8 @@
+import { URL, Url } from "url";
+
 export type NavigationLinkType = {
   textEng: string;
   textJP: string;
-  navLink?: string | null;
-  gridProperties?: tailwind;
+  navLink: string;
+  gridProperties?: string;
 };

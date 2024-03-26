@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Sans_JP } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
+import HomeTextContainer from "@/components/homeTextContainer";
+import PhotoContainer from "@/components/photoContainer";
 
 const fontFamily = Noto_Sans_JP({
   subsets: ["latin", "latin-ext"],
@@ -19,7 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={fontFamily.className}>{children}</body>
+      <body className={fontFamily.className}>
+        <main className="flex min-h-screen flex-col justify-center items-center p-0 m-0 relative">
+          <HomeTextContainer />
+
+          <PhotoContainer>{children}</PhotoContainer>
+        </main>
+      </body>
     </html>
   );
 }
