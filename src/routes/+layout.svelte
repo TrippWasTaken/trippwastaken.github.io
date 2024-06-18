@@ -23,9 +23,11 @@
   ];
 </script>
 
-<div class="bg-slate-500 min-h-full min-w-full absolute z-0">
-  <WindowComponent />
-  <div class="absolute overflow-hidden bottom-0 left-0 min-w-full p-1 h-12 flex justify-between items-center taskbar">
+<div class="bg-slate-500 min-h-[100vh] min-w-[100vw] relative flex-col flex z-0">
+  <div class="flex-1 relative">
+    <WindowComponent />
+  </div>
+  <div class="overflow-hidden min-w-full p-1 h-12 flex justify-between items-center taskbar">
     <div>placeholder</div>
     <div class="inline-flex items-center h-full">
       {#each taskbarBtns as btn}
