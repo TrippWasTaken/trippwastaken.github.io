@@ -4,6 +4,7 @@
   import TaskBarButton from './components/taskBarButton.svelte';
   import WindowComponent from './components/windowComponent.svelte';
 
+  let windowBounds: HTMLDivElement | undefined = $state();
   const taskbarBtns = [
     {
       src: '/png/windows-0.png',
@@ -24,8 +25,8 @@
 </script>
 
 <div class="bg-slate-500 min-h-[100vh] min-w-[100vw] relative flex-col flex z-0">
-  <div class="flex-1 relative">
-    <WindowComponent />
+  <div class="flex-1 relative overflow-hidden" bind:this={windowBounds}>
+    <WindowComponent {windowBounds} />
   </div>
   <div class="overflow-hidden min-w-full p-1 h-12 flex justify-between items-center taskbar">
     <div>placeholder</div>
