@@ -52,6 +52,14 @@
         if (prevWidth !== windowWidth) left += e.movementX;
       }
     }
+
+    if (resizingY && windowElement) {
+      if (!offsetWindow) windowHeight = windowElement.clientHeight + e.movementY;
+      else {
+        windowHeight = windowElement.clientHeight - e.movementY;
+        top += e.movementY;
+      }
+    }
   };
 
   const toggleSize = (externalLeft: null | number = null) => {
@@ -117,8 +125,16 @@
   style="left: {left}px; top: {top}px; width:{windowWidth}px; height:{windowHeight}px"
   bind:this={windowElement}
 >
-  <div class="absolute -top-[1px] cursor-n-resize h-[2px] w-full select-none" role="none"></div>
-  <div class="absolute bottom-[0px] cursor-s-resize h-[2px] w-full"></div>
+  <div
+    class="absolute -top-[1px] cursor-n-resize h-[2px] w-full select-none"
+    role="none"
+    onmousedown={() => onMouseDown('resizingY', true)}
+  ></div>
+  <div
+    class="absolute bottom-[0px] cursor-s-resize h-[2px] w-full"
+    role="none"
+    onmousedown={() => onMouseDown('resizingY')}
+  ></div>
   <div
     class="absolute -left-[1px] cursor-w-resize w-[2px] h-full"
     role="none"
