@@ -4,13 +4,18 @@
   let moving = $state(false);
   let resizingX = $state(false);
   let resizingY = $state(false);
-  let minWidthReached = $state(false);
-  let prevWidth = $state(0);
   let windowWidth = $state(0);
   let windowHeight = $state(0);
   let offsetWindow = $state(false);
-
+  let maximize = $state({
+    fullscreened: false,
+    preWidth: 0,
+    preHeight: 0,
+    preLeft: 0,
+    preTop: 0
+  });
   let { windowBounds }: { windowBounds: HTMLDivElement } = $props();
+  let maxTop = $state(0);
 
   let left = $state(0);
   let top = $state(0);
@@ -20,26 +25,61 @@
     if (windowElement) {
       windowWidth = windowBounds.clientWidth / 2;
       windowHeight = windowBounds.clientHeight / 2;
+      top = windowBounds.clientHeight / 4;
+      left = windowBounds.clientWidth / 4;
+      maxTop = windowBounds.clientTop - 10;
     }
   });
 
-  console.log(windowBounds);
   const onMouseMove = (e: MouseEvent, offset: boolean = false) => {
     if (moving && windowElement) {
+      const maxLeft = windowBounds.clientLeft - 10;
       left += e.movementX;
+      if (top < maxTop) {
+        top = maxTop;
+      }
       top += e.movementY;
+      if (maximize.fullscreened) {
+        toggleSize(e.clientX);
+      }
     }
 
     if (resizingX && windowElement) {
       const prevWidth = windowWidth;
       if (!offsetWindow) windowWidth = windowElement.clientWidth + e.movementX;
       else {
-        windowWidth = windowWidth = windowElement.clientWidth - e.movementX;
+        windowWidth = windowElement.clientWidth - e.movementX;
         if (prevWidth !== windowWidth) left += e.movementX;
       }
     }
   };
 
+  const toggleSize = (externalLeft: null | number = null) => {
+    if (windowElement) {
+      if (!maximize.fullscreened) {
+        maximize.fullscreened = true;
+        maximize.preHeight = windowHeight;
+        maximize.preWidth = windowWidth;
+        maximize.preTop = top;
+        maximize.preLeft = left;
+        windowWidth = windowBounds.clientWidth;
+        windowHeight = windowBounds.clientHeight;
+        top = 0;
+        left = 0;
+      } else {
+        maximize.fullscreened = false;
+        windowWidth = maximize.preWidth;
+        windowHeight = maximize.preHeight;
+        top = maximize.preTop;
+        left = maximize.preLeft;
+
+        if (externalLeft) {
+          left = externalLeft / 2;
+          top = 0;
+        }
+      }
+    }
+  };
   const onMouseDown = (valueToSwitch: string, offset = false) => {
     switch (valueToSwitch) {
       case 'moving':
@@ -61,12 +101,17 @@
 
   const onMouseUp = () => {
     if (moving) moving = false;
+    if (top < maxTop + 10 && !maximize.fullscreened) {
+      maximize.preTop = 0;
+      toggleSize();
+    }
     if (resizingX) resizingX = false;
     if (resizingY) resizingY = false;
   };
 </script>
 
 <svelte:window onmouseup={onMouseUp} onmousemove={onMouseMove} />
+<div class="absolute w-full border-2 rounded-lg bg-white opacity-50 blur-lg" style="top: 0; left: 0 height: 0"></div>
 <div
   class="window absolute resizable-window select-none"
   style="left: {left}px; top: {top}px; width:{windowWidth}px; height:{windowHeight}px"
@@ -86,12 +131,17 @@
   ></div>
 
   <div class="title-bar select-none">
-    <div class="title-bar-text select-none w-full" onmousedown={() => onMouseDown('moving')} role="none">
+    <div
+      class="title-bar-text select-none w-full"
+      ondblclick={() => toggleSize()}
+      onmousedown={() => onMouseDown('moving')}
+      role="none"
+    >
       A Window With Stuff In It
     </div>
     <div class="title-bar-controls">
       <button aria-label="Minimize"></button>
-      <button aria-label="Maximize"></button>
+      <button aria-label="Maximize" onclick={() => toggleSize()}></button>
       <button aria-label="Close"></button>
     </div>
   </div>
