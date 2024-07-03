@@ -1,0 +1,13 @@
+@import url('./assets/fonts/Nohemi-Black.css');
+@import url('./assets/fonts/Nohemi-Bold.css');
+@import url('./assets/fonts/Nohemi-ExtraBold.css');
+@import url('./assets/fonts/Nohemi-ExtraLight.css');
+@import url('./assets/fonts/Nohemi-Light.css');
+@import url('./assets/fonts/Nohemi-Medium.css');
+@import url('./assets/fonts/Nohemi-Regular.css');
+@import url('./assets/fonts/Nohemi-SemiBold.css');
+@import url('./assets/fonts/Nohemi-Thin.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

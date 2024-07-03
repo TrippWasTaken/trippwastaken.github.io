@@ -4,7 +4,6 @@
   "insertPragma": false,
   "jsxBracketSameLine": false,
   "jsxSingleQuote": false,
-  "parser": "babel-flow",
   "proseWrap": "preserve",
   "requirePragma": false,
   "semi": true,
