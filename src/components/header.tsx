@@ -1,46 +1,63 @@
 import { average } from 'color.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import MenuItem from './menuItem';
+import { lightOrDark } from '../utils/lightOrDark';
+import PageContainer from './pageContainer';
 
 interface Props {}
+type Hex = string;
+type Rgb = [r: number, g: number, b: number];
+type Output = Hex | Rgb | (Hex | Rgb)[] | string;
 
 const Header: React.FC<Props> = () => {
-  const [ImgColor, setImgColor] = useState<undefined | string>();
+  const [ImgColor, setImgColor] = useState<undefined | Output>();
   const [currImg, setCurrImage] = useState(0);
 
-  const images = [
-    '/src/assets/public/intro-photo.png',
-    '/src/assets/public/DSC03821.png',
-    '/src/assets/public/git-photo.png',
-    '/src/assets/public/about-photo.png',
-    '/src/assets/public/socials-photo.png',
-    '/src/assets/public/work-photo.png'
+  const images = useMemo(
+    () => [
+      '/src/assets/public/intro-photo.png',
+      '/src/assets/public/DSC03821.png',
+      '/src/assets/public/git-photo.png',
+      '/src/assets/public/about-photo.png',
+      '/src/assets/public/socials-photo.png',
+      '/src/assets/public/work-photo.png'
+    ],
+    []
+  );
+
+  const categories = [
+    { text: 'About', hoverText: '自分について', linksTo: '#' },
+    { text: 'Photo', hoverText: '写真', linksTo: '#' },
+    { text: 'Dev', hoverText: 'デベロップメント', linksTo: '#' },
+    { text: 'Video', hoverText: '動画', linksTo: '#' },
+    { text: 'Music', hoverText: '音楽', linksTo: '#' }
   ];
 
-  const categories = [{ text: 'About' }, { text: 'Photo' }, { text: 'Dev' }, { text: 'Video' }, { text: 'Music' }];
-  const lightOrDark = (color: any) => {
-    let r, g, b, hsp;
-    color = +('0x' + color.slice(1).replace(color.length < 5 && /./g, '$&$&'));
-    r = color >> 16;
-    g = (color >> 8) & 255;
-    b = color & 255;
-    hsp = Math.sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
-    return hsp > 127.5 ? 'light' : 'dark';
-  };
+  useEffect(() => {
+    average(images[currImg], { format: 'hex' }).then((color) => setImgColor(color));
+  }, [currImg, images]);
 
   useEffect(() => {
-    average(images[currImg], { format: 'hex' }).then((color) => {
-      setImgColor(color);
-    });
+    let animationFrameId: number;
+    let start: number;
 
-    setTimeout(() => nextImage(), 2000);
-  }, [currImg]);
+    const updateTransitionState = (timestamp: number) => {
+      if (!start) start = timestamp;
+      const elapsed = timestamp - start;
 
-  const nextImage = () => {
-    let newImage = currImg + 1;
-    if (newImage === images.length) newImage = 0;
-    setCurrImage(newImage);
-  };
+      if (elapsed >= 3000) {
+        setCurrImage((prevState) => (prevState + 1) % images.length);
+        start = timestamp;
+      }
+      animationFrameId = requestAnimationFrame(updateTransitionState);
+    };
+
+    animationFrameId = requestAnimationFrame(updateTransitionState);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [images.length]);
+
   return (
     <>
       <section className="min-h-full w-full max-w-[1920px] rounded-2xl select-none relative overflow-hidden flex flex-col ">
@@ -53,7 +70,7 @@ const Header: React.FC<Props> = () => {
             transition={{ duration: 1, ease: 'easeInOut' }}
             className="absolute top-0 left-0 w-full h-full"
             style={{
-              backgroundColor: ImgColor ? ImgColor : 'rgb(0,0,0)',
+              backgroundColor: ImgColor ? ImgColor.toString() : 'rgb(0,0,0)',
               color: ImgColor && lightOrDark(ImgColor) === 'light' ? 'rgb(0,0,0)' : 'rgb(255,255,255)'
             }}
           ></motion.div>
@@ -81,18 +98,27 @@ const Header: React.FC<Props> = () => {
               I make <span className=" bg-black font-semibold p-3 -ml-1.5 rounded-2xl">things</span>
             </h3>
           </div>
-          <AnimatePresence initial mode="sync">
-            <ul className="flex flex-col justify-center gap-5">
-              {categories.map((menuItem) => {
-                return (
-                  <motion.li className="text-6xl" key={menuItem.text}>
-                    {menuItem.text}
-                  </motion.li>
-                );
-              })}
-            </ul>
-          </AnimatePresence>
+
+          <ul className=" flex flex-1 flex-col">
+            {categories.map((menuItem) => {
+              return (
+                <MenuItem
+                  key={menuItem.text}
+                  text={menuItem.text}
+                  hoverText={menuItem.hoverText}
+                  linksTo={menuItem.linksTo}
+                />
+              );
+            })}
+          </ul>
         </div>
+        <PageContainer image={'/src/assets/public/intro-photo.png'}>
+          <h1>About me random div</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse velit dolorum unde quis tempore? Minus rerum
+            assumenda veniam, reiciendis deserunt ipsa iste possimus enim natus, nihil eaque fuga beatae fugit.
+          </p>
+        </PageContainer>
       </section>
     </>
   );
