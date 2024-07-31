@@ -1,10 +1,11 @@
 import './App.css';
-import Header from './components/header';
+
+import TopNav from './components/topNav';
 
 function App() {
   return (
-    <div className="min-h-screen min-w-full p-6 bg-black text-white flex justify-center">
-      <Header />
+    <div className="min-h-screen min-w-full bg-zinc-800 text-zinc-100 flex justify-center">
+      <TopNav />
     </div>
   );
 }

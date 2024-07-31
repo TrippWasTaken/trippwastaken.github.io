@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import MenuItem from './menuItem';
 import { lightOrDark } from '../utils/lightOrDark';
-import PageContainer from './pageContainer';
+import TopNav from './topNav';
 
 interface Props {}
 type Hex = string;
@@ -60,7 +60,7 @@ const Header: React.FC<Props> = () => {
 
   return (
     <>
-      <section className="min-h-full w-full max-w-[1920px] rounded-2xl select-none relative overflow-hidden flex flex-col ">
+      <section className="min-h-full w-full rounded-2xl select-none relative overflow-hidden flex flex-col ">
         <AnimatePresence initial mode="sync">
           <motion.div
             key={`color-${currImg}`}
@@ -112,13 +112,6 @@ const Header: React.FC<Props> = () => {
             })}
           </ul>
         </div>
-        <PageContainer image={'/src/assets/public/intro-photo.png'}>
-          <h1>About me random div</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse velit dolorum unde quis tempore? Minus rerum
-            assumenda veniam, reiciendis deserunt ipsa iste possimus enim natus, nihil eaque fuga beatae fugit.
-          </p>
-        </PageContainer>
       </section>
     </>
   );

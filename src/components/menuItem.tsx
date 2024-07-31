@@ -1,11 +1,14 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { category } from '../types';
 
-function MenuItem({ text, hoverText, linksTo }: { text: string; hoverText: string; linksTo: string }) {
+function MenuItem({ category }: { category: category }) {
   const [isHovered, setHovered] = useState(false);
+
+  const { text, hoverText, linksTo } = category;
   return (
     <li
-      className="text-6xl overflow-hidden min-w-full"
+      className="text-6xl overflow-hidden min-w-full relative"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -16,7 +19,17 @@ function MenuItem({ text, hoverText, linksTo }: { text: string; hoverText: strin
         transition={{ type: 'tween', duration: 0.25 }}
       >
         <div className="py-2">{text}</div>
-        <div className="absolute py-2">{hoverText}</div>
+        <div className="absolute py-2">
+          <span className="relative">
+            {hoverText}{' '}
+            <motion.div
+              transition={{ repeat: Infinity, repeatType: 'loop', duration: 0.5 }}
+              // initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="absolute -right-10 w-10 bg-yellow-300 h-4"
+            />
+          </span>
+        </div>
       </motion.div>
     </li>
   );
