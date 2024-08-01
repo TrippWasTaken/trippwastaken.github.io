@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import { categories } from '../types';
 import MenuItem from './menuItem';
 import UnderlineText from './underlineText';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const TopNav: FC = () => {
   const categories: categories = [
@@ -14,6 +15,7 @@ const TopNav: FC = () => {
 
   const [isHovered, setHovered] = useState<boolean>(false);
   const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
+  const [animationComplete, setAnimationComplete] = useState<boolean>(false);
   return (
     <>
       <div className="w-full flex flex-row justify-between h-fit p-10 z-50">
@@ -38,16 +40,47 @@ const TopNav: FC = () => {
           </span>
         </button>
       </div>
-
-      <div className="absolute w-full h-screen p-0 m-0 bg-slate-400">
-        <ul className="w-3/4 h-full flex justify-center content-center items-center bg-zinc-800">
-          <div className="p-5 w-full">
-            {categories.map((item) => (
-              <MenuItem category={item} key={item.text} />
-            ))}
-          </div>
-        </ul>
-      </div>
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            <motion.div
+              initial={{ x: '-100%' }}
+              exit={{ x: '-100%' }}
+              animate={{
+                x: 0
+              }}
+              transition={{ type: 'tween', ease: 'circInOut' }}
+              className="absolute w-full h-screen p-0 m-0 z-10"
+            >
+              <motion.ul
+                initial={{ x: '-100%' }}
+                exit={{ x: '-100%' }}
+                animate={{
+                  x: 0
+                }}
+                transition={{ type: 'tween', ease: 'circInOut' }}
+                className="w-3/4 h-full flex justify-center content-center items-center bg-zinc-800"
+                onAnimationComplete={() => setAnimationComplete((prev) => !prev)}
+              >
+                <div className="p-5 w-full">
+                  {categories.map((item) => (
+                    <MenuItem category={item} key={item.text} />
+                  ))}
+                </div>
+              </motion.ul>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              exit={{ opacity: 0 }}
+              animate={{
+                opacity: 0.25
+              }}
+              transition={{ type: 'tween', ease: 'circInOut' }}
+              className="absolute w-full h-screen p-0 m-0 bg-slate-100 z-0 blur-lg bg-blend-difference"
+            />
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 };
