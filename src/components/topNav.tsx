@@ -30,7 +30,7 @@ const TopNav: FC = () => {
 
   return (
     <>
-      <div className="w-full flex flex-row justify-between h-fit p-10 z-50">
+      <div className="w-full flex flex-row justify-between h-fit p-10 z-[55] fixed">
         <h1 className=" text-4xl font-semibold">
           <span className="relative">
             TRIPP
@@ -62,7 +62,7 @@ const TopNav: FC = () => {
                 x: 0
               }}
               transition={{ type: 'tween', ease: 'circInOut' }}
-              className="absolute w-full h-screen p-0 m-0 z-10"
+              className="fixed w-full h-screen p-0 m-0 z-40"
             >
               <motion.div
                 initial={{ opacity: 0 }}
@@ -72,7 +72,7 @@ const TopNav: FC = () => {
                 }}
                 onClick={() => isMenuOpen && setMenuOpen(false)}
                 transition={{ type: 'tween', ease: 'circInOut' }}
-                className="absolute w-full h-screen p-0 m-0 bg-transparent z-5 cursor-pointer top"
+                className="absolute w-full h-screen p-0 m-0 bg-transparent z-0 cursor-pointer"
               />
               <section className="relative w-3/4 h-full flex flex-col justify-center content-center items-center bg-zinc-800 select-none">
                 <motion.ul
@@ -122,7 +122,7 @@ const TopNav: FC = () => {
                 opacity: 0.25
               }}
               transition={{ type: 'tween', ease: 'circInOut' }}
-              className="absolute w-full h-screen p-0 m-0 bg-slate-100 z-5 blur-lg bg-blend-difference cursor-pointer top"
+              className="absolute w-full h-screen p-0 m-0 bg-slate-100 z-10 blur-xl cursor-pointer"
             />
           </>
         )}
