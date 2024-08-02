@@ -3,8 +3,11 @@ import { categories } from '../types';
 import MenuItem from './menuItem';
 import UnderlineText from './underlineText';
 import { AnimatePresence, motion } from 'framer-motion';
+import ContactLinks from './contactLinks';
 
 const TopNav: FC = () => {
+  const [isHovered, setHovered] = useState<boolean>(false);
+  const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
   const categories: categories = [
     { text: 'About', hoverText: '自分について', linksTo: '#' },
     { text: 'Photo', hoverText: '写真', linksTo: '#' },
@@ -13,9 +16,18 @@ const TopNav: FC = () => {
     { text: 'Music', hoverText: '音楽', linksTo: '#' }
   ];
 
-  const [isHovered, setHovered] = useState<boolean>(false);
-  const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
-  const [animationComplete, setAnimationComplete] = useState<boolean>(false);
+  const contactAnimText = [
+    'Contact連絡',
+    'Contact連絡',
+    'Contact連絡',
+    'Contact連絡',
+    'Contact連絡',
+    'Contact連絡',
+    'Contact連絡',
+    'Contact連絡',
+    'Contact連絡'
+  ];
+
   return (
     <>
       <div className="w-full flex flex-row justify-between h-fit p-10 z-50">
@@ -52,22 +64,56 @@ const TopNav: FC = () => {
               transition={{ type: 'tween', ease: 'circInOut' }}
               className="absolute w-full h-screen p-0 m-0 z-10"
             >
-              <motion.ul
-                initial={{ x: '-100%' }}
-                exit={{ x: '-100%' }}
+              <motion.div
+                initial={{ opacity: 0 }}
+                exit={{ opacity: 0 }}
                 animate={{
-                  x: 0
+                  opacity: 0.25
                 }}
+                onClick={() => isMenuOpen && setMenuOpen(false)}
                 transition={{ type: 'tween', ease: 'circInOut' }}
-                className="w-3/4 h-full flex justify-center content-center items-center bg-zinc-800"
-                onAnimationComplete={() => setAnimationComplete((prev) => !prev)}
-              >
-                <div className="p-5 w-full">
-                  {categories.map((item) => (
-                    <MenuItem category={item} key={item.text} />
-                  ))}
+                className="absolute w-full h-screen p-0 m-0 bg-transparent z-5 cursor-pointer top"
+              />
+              <section className="relative w-3/4 h-full flex flex-col justify-center content-center items-center bg-zinc-800 select-none">
+                <motion.ul
+                  initial={{ x: '-100%' }}
+                  exit={{ x: '-100%' }}
+                  animate={{
+                    x: 0
+                  }}
+                  transition={{ type: 'tween', ease: 'circInOut' }}
+                  className="w-full flex justify-center content-center items-center"
+                >
+                  <div className="p-5 w-full">
+                    {categories.map((item) => (
+                      <MenuItem category={item} key={item.text} />
+                    ))}
+                  </div>
+                </motion.ul>
+                <div className="w-full h-1 bg-yellow-300 mt-5 mb-5" />
+
+                <div className=" overflow-hidden w-full">
+                  <motion.div className="flex flex-row overflow-show gap-4 flex-nowrap">
+                    <p className=" text-8xl opacity-10 text-nowrap m-0 p-0">
+                      {contactAnimText.map((text, index) => (
+                        <motion.span
+                          key={index}
+                          className="inline-block m-0 p-0 whitespace-pre"
+                          transition={{
+                            translateX: { repeat: Infinity, duration: 10, repeatType: 'loop', ease: 'linear' }
+                          }}
+                          initial={{ translateX: '0%' }}
+                          animate={{ translateX: '-100%' }}
+                        >
+                          {text}
+                        </motion.span>
+                      ))}
+                    </p>
+                  </motion.div>
                 </div>
-              </motion.ul>
+
+                <ContactLinks />
+              </section>
             </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
@@ -76,7 +122,7 @@ const TopNav: FC = () => {
                 opacity: 0.25
               }}
               transition={{ type: 'tween', ease: 'circInOut' }}
-              className="absolute w-full h-screen p-0 m-0 bg-slate-100 z-0 blur-lg bg-blend-difference"
+              className="absolute w-full h-screen p-0 m-0 bg-slate-100 z-5 blur-lg bg-blend-difference cursor-pointer top"
             />
           </>
         )}

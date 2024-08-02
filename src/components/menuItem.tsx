@@ -1,8 +1,8 @@
 import { AnimationProps, motion } from 'framer-motion';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { category } from '../types';
 
-function MenuItem({ category }: { category: category }) {
+const MenuItem: FC<{ category: category }> = ({ category }) => {
   const [isHovered, setHovered] = useState(false);
 
   const { text, hoverText, linksTo } = category;
@@ -22,25 +22,27 @@ function MenuItem({ category }: { category: category }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <motion.div
-        className="relative top-0 left-0 w-full"
-        initial={{ y: 0 }}
-        animate={{ y: isHovered ? '-100%' : '0' }}
-        transition={{ type: 'tween', duration: 0.25 }}
-      >
-        <div className="py-2">{text}</div>
-        <div className="absolute py-2">
-          <span className="relative">
-            {hoverText}
-            <motion.div
-              animate={isHovered ? hoverLineAnim : { opacity: 0 }}
-              className="absolute -right-10 h-[4rem] bottom-0 bg-yellow-300 w-2 overflow-visible"
-            />
-          </span>
-        </div>
-      </motion.div>
+      <a href={linksTo}>
+        <motion.div
+          className="relative top-0 left-0 w-full"
+          initial={{ y: 0 }}
+          animate={{ y: isHovered ? '-100%' : '0' }}
+          transition={{ type: 'tween', duration: 0.25 }}
+        >
+          <div className="py-2">{text}</div>
+          <div className="absolute py-2">
+            <span className="relative">
+              {hoverText}
+              <motion.div
+                animate={isHovered ? hoverLineAnim : { opacity: 0 }}
+                className="absolute -right-10 h-[4rem] bottom-0 bg-yellow-300 w-2 overflow-visible"
+              />
+            </span>
+          </div>
+        </motion.div>
+      </a>
     </li>
   );
-}
+};
 
 export default MenuItem;
