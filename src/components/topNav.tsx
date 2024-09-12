@@ -9,7 +9,7 @@ const TopNav: FC = () => {
   const [isHovered, setHovered] = useState<boolean>(false);
   const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
   const categories: categories = [
-    { text: 'About', hoverText: '自分について', linksTo: '#' },
+    { text: 'About', hoverText: '自分について', linksTo: '#About' },
     { text: 'Photo', hoverText: '写真', linksTo: '#' },
     { text: 'Dev', hoverText: 'デベロップメント', linksTo: '#' },
     { text: 'Video', hoverText: '動画', linksTo: '#' },

@@ -1,6 +1,7 @@
 import './App.css';
 import AboutScreen from './components/aboutScreen';
 import IntroScreen from './components/introScreen';
+import PhotoScreen from './components/photoScreen';
 
 import TopNav from './components/topNav';
 
@@ -10,6 +11,7 @@ function App() {
       <TopNav />
       <IntroScreen />
       <AboutScreen />
+      <PhotoScreen />
     </div>
   );
 }
