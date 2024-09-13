@@ -1,5 +1,4 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
 
 export const PhotoViewer = ({
   photos,
@@ -10,8 +9,6 @@ export const PhotoViewer = ({
   selected: number | null;
   selectedChanged: (reverse?: boolean) => void;
 }) => {
-  const [goingBack, setGoingBack] = useState<boolean>(false);
-
   return (
     selected !== null && (
       <AnimatePresence>
@@ -39,17 +36,11 @@ export const PhotoViewer = ({
           </div>
           <div
             className="left-0 absolute  z-40 w-1/2 h-full overflow-hidden cursor-pointer"
-            onClick={() => {
-              setGoingBack(true);
-              selectedChanged(true);
-            }}
+            onClick={() => selectedChanged(true)}
           />
           <div
             className="right-0 absolute  z-40 w-1/2 h-full overflow-hidden cursor-pointer"
-            onClick={() => {
-              setGoingBack(false);
-              selectedChanged();
-            }}
+            onClick={() => selectedChanged()}
           />
         </motion.div>
       </AnimatePresence>
