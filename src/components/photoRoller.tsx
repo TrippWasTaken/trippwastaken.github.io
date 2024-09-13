@@ -44,7 +44,7 @@ function PhotoRoller({ photos, reverse = false }: { photos: string[]; reverse?: 
     if (selected === photos.length - 1 && !reverse) {
       setSelected(0);
     } else {
-      setSelected((prev) => prev + (reverse ? -1 : 1));
+      setSelected((prev) => (prev ?? 0) + (reverse ? -1 : 1));
     }
   };
 
