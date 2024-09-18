@@ -24,7 +24,7 @@ function PhotoRoller({ photos, reverse = false }: { photos: string[]; reverse?: 
           duration: 100,
           repeat: Infinity,
           repeatType: 'loop',
-          repeatDelay: 0
+          repeatDelay: 0 
         }
       );
       return controlsRef.current.stop;
