@@ -1,9 +1,16 @@
 import { useRef, useState } from 'react';
+import { animate, motion, useMotionValue } from 'framer-motion';
 import ReactPlayer from 'react-player';
 
 const MusicPlayer = ({ trackList }: { trackList: { name: string; src: string }[] }) => {
   const [currSong, setCurrSong] = useState(0);
   const [currSongDetails, setCurrSongDetails] = useState({ duration: '00:00' });
+  const [playing, setPlaying] = useState(false);
+  const [volume, setVolume] = useState(0.6);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
   const ref = useRef<ReactPlayer | null>(null);
 
   const getCurrSongDetails = () => {
@@ -25,8 +32,46 @@ const MusicPlayer = ({ trackList }: { trackList: { name: string; src: string }[]
   const changeCurrSong = () => {
     setCurrSong((prev) => (prev + 1 < trackList.length ? prev + 1 : 0));
   };
+
+  const mouseMove = (e) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+
+    mouseX.set(((e.clientX - left) / width) * -20);
+    mouseY.set(((e.clientY - top) / height) * -20);
+  };
+
+  const onClickCard = (e, nativeEvent) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+
+    console.log(nativeEvent.offsetX / width);
+
+    if (nativeEvent.offsetX / width > 0.5) {
+      console.log('up');
+    } else {
+      console.log('down');
+    }
+  };
+
+  const onClickYT = () => {
+    if (ref.current) {
+      setPlaying((p) => !p);
+    }
+  };
   return (
-    <div className="w-5/6 max-w-[800px] h-auto aspect-square shadow-2xl bg-red-400 justify-center items-center relative mt-10">
+    <motion.div
+      className="sm: w-full w-5/6 max-w-[800px] max-h-full aspect-square shadow-2xl bg-red-400 justify-center items-center relative mt-10"
+      onClick={(e) => onClickCard(e, e.nativeEvent)}
+      onMouseMove={mouseMove}
+      onMouseLeave={() => {
+        animate(mouseX, 0);
+        animate(mouseY, 0);
+      }}
+      style={{
+        translateX: mouseX,
+        translateY: mouseY
+      }}
+      transition={{ type: 'spring', stiffness: 150, damping: 20 }}
+    >
       <div className="w-full h-full grid grid-cols-2 grid-rows-2 gap-0 p-5">
         <div className="place-self-start">
           Track: <span className="font-bold">{trackList[currSong].name}</span>
@@ -60,13 +105,18 @@ const MusicPlayer = ({ trackList }: { trackList: { name: string; src: string }[]
           </span>
         </div>
       </div>
-      <div className="z-10 absolute w-2/3 -translate-x-1/2 left-1/2 top-1/2 -translate-y-1/2">
+      <div
+        className="z-10 absolute w-2/3 -translate-x-1/2 left-1/2 top-1/2 -translate-y-1/2"
+        onClick={() => onClickYT()}
+      >
         <ReactPlayer
           ref={ref}
           url={trackList[currSong].src}
-          style={{ aspectRatio: '1/1' }}
-          height={'100%'}
-          width={'100%'}
+          style={{ aspectRatio: '1/1', pointerEvents: 'none' }}
+          width={'auto'}
+          height={'auto'}
+          playing={playing}
+          volume={volume}
           config={{
             youtube: {
               playerVars: {
@@ -78,7 +128,7 @@ const MusicPlayer = ({ trackList }: { trackList: { name: string; src: string }[]
           onReady={() => getCurrSongDetails()}
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
