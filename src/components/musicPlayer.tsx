@@ -6,7 +6,7 @@ const MusicPlayer = ({ trackList }: { trackList: { name: string; src: string }[]
   const [currSong, setCurrSong] = useState(0);
   const [currSongDetails, setCurrSongDetails] = useState({ duration: '00:00' });
   const [playing, setPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.6);
+  const [volume] = useState(0.6);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -35,7 +35,8 @@ const MusicPlayer = ({ trackList }: { trackList: { name: string; src: string }[]
 
   const mouseMove = (e: MouseEvent<HTMLElement>): void => {
     if (e.currentTarget) {
-      const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+      return;
+      // const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
 
       // mouseX.set(((e.clientX - left) / width) * -20);
       // mouseY.set(((e.clientY - top) / height) * -20);
