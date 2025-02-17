@@ -10,10 +10,10 @@ const TopNav: FC = () => {
   const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
   const categories: categories = [
     { text: 'About', hoverText: '自分について', linksTo: '#About' },
-    { text: 'Photo', hoverText: '写真', linksTo: '#' },
-    { text: 'Dev', hoverText: 'デベロップメント', linksTo: '#' },
-    { text: 'Video', hoverText: '動画', linksTo: '#' },
-    { text: 'Music', hoverText: '音楽', linksTo: '#' }
+    { text: 'Photo', hoverText: '写真', linksTo: '#Photo' },
+    { text: 'Dev: WIP', hoverText: 'デベロップメント', linksTo: '#' },
+    { text: 'Video: WIP', hoverText: '動画', linksTo: '#' },
+    { text: 'Music', hoverText: '音楽', linksTo: '#Music' }
   ];
 
   const contactAnimText = [

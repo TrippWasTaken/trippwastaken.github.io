@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { MouseEvent, useRef, useState } from 'react';
 import { animate, motion, useMotionValue } from 'framer-motion';
 import ReactPlayer from 'react-player';
 
@@ -33,22 +33,25 @@ const MusicPlayer = ({ trackList }: { trackList: { name: string; src: string }[]
     setCurrSong((prev) => (prev + 1 < trackList.length ? prev + 1 : 0));
   };
 
-  const mouseMove = (e) => {
-    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+  const mouseMove = (e: MouseEvent<HTMLElement>): void => {
+    if (e.currentTarget) {
+      const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
 
-    mouseX.set(((e.clientX - left) / width) * -20);
-    mouseY.set(((e.clientY - top) / height) * -20);
+      // mouseX.set(((e.clientX - left) / width) * -20);
+      // mouseY.set(((e.clientY - top) / height) * -20);
+    }
   };
 
-  const onClickCard = (e, nativeEvent) => {
-    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+  const onClickCard = (e: MouseEvent<HTMLElement>) => {
+    if (e.currentTarget) {
+      const { width } = e.currentTarget.getBoundingClientRect();
+      const native = e.nativeEvent;
 
-    console.log(nativeEvent.offsetX / width);
-
-    if (nativeEvent.offsetX / width > 0.5) {
-      console.log('up');
-    } else {
-      console.log('down');
+      if (native.offsetX / width > 0.5) {
+        console.log('up');
+      } else {
+        console.log('down');
+      }
     }
   };
 
@@ -59,8 +62,8 @@ const MusicPlayer = ({ trackList }: { trackList: { name: string; src: string }[]
   };
   return (
     <motion.div
-      className="sm: w-full w-5/6 max-w-[800px] max-h-full aspect-square shadow-2xl bg-red-400 justify-center items-center relative mt-10"
-      onClick={(e) => onClickCard(e, e.nativeEvent)}
+      className="sm:w-full max-w-[700px] max-h-[700px] aspect-square shadow-2xl bg-red-400 justify-center items-center relative mt-10"
+      onClick={(e) => onClickCard(e)}
       onMouseMove={mouseMove}
       onMouseLeave={() => {
         animate(mouseX, 0);

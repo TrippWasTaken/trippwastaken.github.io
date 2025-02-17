@@ -27,7 +27,7 @@ function PhotoScreen() {
   ];
   return (
     <PageContainer>
-      <main className="w-full h-screen flex flex-col items-center justify-center">
+      <main className="w-full h-screen flex flex-col items-center justify-center" id="Photo">
         <PhotoRoller photos={photos} />
         <h1 className="h-1/3 text-4xl flex items-center">Lately Ive liked taking photos so heres a few</h1>
         <PhotoRoller photos={photos} reverse />
