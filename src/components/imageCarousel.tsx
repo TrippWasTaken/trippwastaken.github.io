@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { FC, useEffect, useState } from 'react';
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 const ImageCarousel: FC<{ images: string[]; time?: number }> = ({ images = [], time = 3000 }) => {
   const [currImg, setCurrImage] = useState(0);
   useEffect(() => {
@@ -33,7 +35,7 @@ const ImageCarousel: FC<{ images: string[]; time?: number }> = ({ images = [], t
           exit={{ y: '50%' }}
           transition={{ duration: 1, ease: 'easeInOut' }}
           className="absolute lg:-top-1/2"
-          src={images[currImg]}
+          src={BASE_URL + images[currImg]}
           alt="dynamic background image"
         />
       </AnimatePresence>

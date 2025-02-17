@@ -2,6 +2,8 @@ import { animate, AnimatePresence, AnimationPlaybackControls, motion, useMotionV
 import { useEffect, useRef, useState } from 'react';
 import { PhotoViewer } from './photoViewer';
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 function PhotoRoller({ photos, reverse = false }: { photos: string[]; reverse?: boolean }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const controlsRef = useRef<AnimationPlaybackControls | null>(null);
@@ -24,7 +26,7 @@ function PhotoRoller({ photos, reverse = false }: { photos: string[]; reverse?: 
           duration: 100,
           repeat: Infinity,
           repeatType: 'loop',
-          repeatDelay: 0 
+          repeatDelay: 0
         }
       );
       return controlsRef.current.stop;
@@ -73,7 +75,7 @@ function PhotoRoller({ photos, reverse = false }: { photos: string[]; reverse?: 
           {[...photosTreated, ...photosTreated].map((photo, i) => (
             <div className="aspect-square relative" key={i}>
               <img
-                src={`/src/assets/public/${photo}`}
+                src={`${BASE_URL}public/${photo}`}
                 className="object-cover w-full h-full absolute overflow-hidden"
                 onClick={() => setSelected(() => photos.findIndex((i) => i === photo))}
               />

@@ -5,7 +5,7 @@ import tailwindcss from 'tailwindcss';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './src',
+  base: process.env.NODE_ENV === 'production' ? '/trippwastaken.github.io/' : '/',
   css: {
     postcss: {
       plugins: [tailwindcss()],

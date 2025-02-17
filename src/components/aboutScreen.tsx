@@ -1,5 +1,7 @@
 import PageContainer from './pageContainer';
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 const AboutScreen = () => {
   return (
     <PageContainer>
@@ -22,7 +24,7 @@ const AboutScreen = () => {
         <div className="w-full p-10 flex flex-col gap-10 justify-center items-center lg:flex-row">
           <div className="w-full lg:w-1/2 overflow-hidden rounded-3xl relative">
             <div className="aspect-square full overflow-hidden rounded-3xl relative">
-              <img className="w-full absolute bottom-0" src="/src/assets/public/about-me.jpg" alt="image of me" />
+              <img className="w-full absolute bottom-0" src={BASE_URL + 'public/about-me.jpg'} alt="image of me" />
             </div>
           </div>
 
@@ -40,10 +42,15 @@ const AboutScreen = () => {
               up being a 1 liner haha but as we went on I refactored the entire page within the app leading to a much
               better DX too for devs working on it moving forward. Since then Ive went on a working holiday in Japan but
               after some doubts Ive landed back in Ireland after almost a year there. While I want to come back I want
-              to get back into my dev career and really maximise my skillset before setting on Tokyo. While Ive been
-              searching for work I worked with PattyMayo a big youtuber within the bounty hunter community on youtube.
-              For them I created their dream FiveM GTA RP server full with discord integration a website with all the
-              info users need and a shop thats easily edited by the server managers via the Zap Hosting Tabex platform.
+              to get back into my dev career and really maximise my skillset before setting on Tokyo. While I was
+              searching for work back in Ireland, I worked with PattyMayo a big youtuber within the bounty hunter
+              community on youtube. For them I created their dream FiveM GTA RP server full with discord integration a
+              website with all the info users need and a shop thats easily edited by the server managers via the Zap
+              Hosting Tabex platform.
+              <br />
+              <br />
+              Now I am working a Software Engineer at Experlogix on some of their latest CPQ solutions as part of a new
+              team focusing on new products.
               <br />
               <br />
               While dev is my Profession. Ive dabbled my toes in video work and photography too, doing multiple works

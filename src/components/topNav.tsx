@@ -122,7 +122,7 @@ const TopNav: FC = () => {
                 opacity: 0.25
               }}
               transition={{ type: 'tween', ease: 'circInOut' }}
-              className="absolute w-full h-screen p-0 m-0 bg-slate-100 z-10 blur-xl cursor-pointer"
+              className="w-full fixed h-full p-0 m-0 bg-slate-100 z-10 blur-xl cursor-pointer"
             />
           </>
         )}

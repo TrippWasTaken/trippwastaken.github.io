@@ -1,5 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 export const PhotoViewer = ({
   photos,
   selected,
@@ -30,7 +32,7 @@ export const PhotoViewer = ({
                 }}
                 key={selected}
                 className="shadow-lg object-cover  w-full h-full"
-                src={`/src/assets/public/${photos[selected]}`}
+                src={`${BASE_URL}${photos[selected]}`}
               />
             </AnimatePresence>
           </div>
