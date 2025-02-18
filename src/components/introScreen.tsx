@@ -3,9 +3,9 @@ import ImageCarousel from './imageCarousel';
 import PageContainer from './pageContainer';
 
 const IntroScreen = () => {
-  const lineOneImages = ['public/1.png', 'public/2.png', 'public/10.png'];
-  const lineTwoImages = ['public/9.png', 'public/4.png', 'public/5.png'];
-  const lineThreeImages = ['public/6.png', 'public/7.png', 'public/8.png'];
+  const lineOneImages = ['1.png', '2.png', '10.png'];
+  const lineTwoImages = ['9.png', '4.png', '5.png'];
+  const lineThreeImages = ['6.png', '7.png', '8.png'];
 
   const isMinWidth = useMediaQuery({
     query: '(min-width: 1028px)'

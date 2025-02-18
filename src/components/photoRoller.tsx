@@ -75,7 +75,7 @@ function PhotoRoller({ photos, reverse = false }: { photos: string[]; reverse?: 
           {[...photosTreated, ...photosTreated].map((photo, i) => (
             <div className="aspect-square relative" key={i}>
               <img
-                src={`${BASE_URL}public/${photo}`}
+                src={`${BASE_URL}${photo}`}
                 className="object-cover w-full h-full absolute overflow-hidden"
                 onClick={() => setSelected(() => photos.findIndex((i) => i === photo))}
               />

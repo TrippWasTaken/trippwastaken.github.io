@@ -24,7 +24,7 @@ const AboutScreen = () => {
         <div className="w-full p-10 flex flex-col gap-10 justify-center items-center lg:flex-row">
           <div className="w-full lg:w-1/2 overflow-hidden rounded-3xl relative">
             <div className="aspect-square full overflow-hidden rounded-3xl relative">
-              <img className="w-full absolute bottom-0" src={BASE_URL + 'public/about-me.jpg'} alt="image of me" />
+              <img className="w-full absolute bottom-0" src={BASE_URL + 'about-me.jpg'} alt="image of me" />
             </div>
           </div>
 
